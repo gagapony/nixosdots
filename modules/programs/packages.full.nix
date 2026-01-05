@@ -5,7 +5,6 @@ let
 in
 {
   home.packages = (with pkgs; [
-    home-manager
     _2048
     radeontop
     vulkan-tools
@@ -38,7 +37,6 @@ in
     soundwireserver # pass audio to android phone
     toipe # typing test in the terminal
     valgrind # c memory analyzer
-    yazi # terminal file manager
     yt-dlp-light
     zenity
     winetricks
@@ -46,7 +44,6 @@ in
     qq
     rustdesk-flutter
     feishu
-    usbutils
     meld
     # orca-slicer
     vlc
@@ -63,7 +60,6 @@ in
     gcc-arm-embedded-13
     # jetbrains.clion
     _stm32cubemx
-    minicom
     rkdeveloptool
     rkflashtool
     android-tools
@@ -101,11 +97,9 @@ in
     # code-cursor
     orca-slicer
 
-    gemini-cli
-    direnv
-    nix-direnv
     brightnessctl
     adwaita-icon-theme
+    todesk
   ]);
   home.file.".local/share/applications/STM32CubeMX.desktop".source =
     "${_stm32cubemx}/share/applications/STM32CubeMX.desktop";

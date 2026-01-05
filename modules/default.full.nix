@@ -10,7 +10,8 @@
     # ./themes/catppuccin/user.nix
     # Programs
     ./programs/python.nix
-    ./programs/packages.nix
+    ./programs/packages.common.nix
+    ./programs/packages.full.nix
     ./programs/kitty.nix
     ./programs/tmux.nix
     ./programs/nvim.nix

@@ -38,7 +38,7 @@
     ];
 
 
-  home-manager.users."${config.var.username}" = import ../../modules/default.desktop.nix;
+  home-manager.users."${config.var.username}" = import ../../modules/default.full.nix;
 
   # Don't touch this
   # nix.nixPath = lib.mkForce ["/etc/nix/inputs"];
