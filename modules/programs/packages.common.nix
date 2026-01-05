@@ -10,6 +10,6 @@
     direnv
     nix-direnv
     claude-code
-    spec-kit
+    # spec-kit
   ]);
 }
