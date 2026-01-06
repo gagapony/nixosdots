@@ -105,6 +105,18 @@
           ignore_alpha=0.5;
           blur = true;
         }
+        {
+          name = "swaync-control";
+          "match:namespace" = "swaync-control-center";
+          ignore_alpha=0.5;
+          blur = true;
+        }
+        {
+          name = "swaync-notification";
+          "match:namespace" = "swaync-notification-window";
+          ignore_alpha=0.5;
+          blur = true;
+        }
       ];
 
       animations = {

@@ -55,6 +55,7 @@ in
       hyprlock.enable = true;
       gedit.enable = true;
       gtk.enable = true;
+      swaync.enable = true;
       gtk.flatpakSupport.enable = true;
     };
   };

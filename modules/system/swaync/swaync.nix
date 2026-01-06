@@ -1,6 +1,646 @@
-{ pkgs, ... }:
+{ config, pkgs, lib, ... }:
+let
+  colors = config.lib.stylix.colors;
+in
 {
   home.packages = (with pkgs; [ swaynotificationcenter ]);
-  xdg.configFile."swaync/style.css".source = ./style.css;
-  xdg.configFile."swaync/config.json".source = ./config.json;
+
+  services.swaync = {
+    enable = true;
+
+    # Config.json 转换为 Nix settings
+    settings = {
+      positionX = "right";
+      positionY = "top";
+      layer = "overlay";
+      layer-shell = true;
+      cssPriority = "application";
+      control-center-margin-top = 10;
+      control-center-margin-bottom = 10;
+      control-center-margin-right = 10;
+      control-center-margin-left = 10;
+      notification-icon-size = 64;
+      notification-body-image-height = 128;
+      notification-body-image-width = 200;
+      timeout = 10;
+      timeout-low = 5;
+      timeout-critical = 0;
+      fit-to-screen = true;
+      control-center-width = 400;
+      control-center-height = 650;
+      notification-window-width = 350;
+      keyboard-shortcuts = true;
+      image-visibility = "when-available";
+      transition-time = 200;
+      hide-on-clear = false;
+      hide-on-action = true;
+      script-fail-notify = true;
+
+      widgets = [
+        "title"
+        "menubar#desktop"
+        "volume"
+        "mpris"
+        "dnd"
+        "notifications"
+      ];
+
+      widget-config = {
+        title = {
+          text = "Notifications";
+          clear-all-button = true;
+          button-text = " Clear All ";
+        };
+
+        "menubar#desktop" = {
+          "menu#powermode-buttons" = {
+            label = " 󰌪 ";
+            position = "left";
+            actions = [
+              { label = "Performance"; command = "powerprofilesctl set performance"; }
+              { label = "Balanced"; command = "powerprofilesctl set balanced"; }
+              { label = "Power-saver"; command = "powerprofilesctl set power-saver"; }
+            ];
+          };
+
+          "menu#screenshot" = {
+            label = "  ";
+            position = "left";
+            actions = [
+              { label = "󰹑  Whole screen"; command = "grimblast --notify --cursor --freeze copy output"; }
+              { label = "󰩭  Window / Region"; command = "grimblast --notify --cursor --freeze copy area"; }
+            ];
+          };
+
+          "menu#record" = {
+            label = " 󰕧 ";
+            position = "left";
+            actions = [
+              { label = "  Record screen"; command = "record screen & ; swaync-client -t"; }
+              { label = "  Record selection"; command = "record area & ; swaync-client -t"; }
+              { label = "  Record GIF"; command = "record gif & ; swaync-client -t"; }
+              { label = "󰻃  Stop"; command = "record stop"; }
+            ];
+          };
+
+          "menu#power-buttons" = {
+            label = "  ";
+            position = "left";
+            actions = [
+              { label = "  Lock"; command = "swaylock"; }
+              { label = "  Hibernate"; command = "systemctl hibernate"; }
+              { label = "  Reboot"; command = "systemctl reboot"; }
+              { label = "  Shut down"; command = "systemctl poweroff"; }
+            ];
+          };
+        };
+
+        "backlight#mobile" = {
+          label = " 󰃠 ";
+          device = "panel";
+        };
+
+        volume = {
+          label = "";
+          expand-button-label = "";
+          collapse-button-label = "";
+          show-per-app = true;
+          show-per-app-icon = true;
+          show-per-app-label = false;
+        };
+
+        dnd = {
+          text = " Do Not Disturb";
+        };
+
+        mpris = {
+          image-size = 85;
+          image-radius = 5;
+        };
+      };
+    };
+
+    # Style.css 转换为 Nix style 字符串，使用 Stylix 颜色变量
+    style = ''
+      /* 定义带透明度的颜色变量 */
+      @define-color base00_alpha alpha(@base00, 0.8);
+      @define-color base01_alpha alpha(@base01, 0.8);
+      @define-color base02_alpha alpha(@base02, 0.8);
+
+      /* 定义淡化的边框颜色 */
+      @define-color border_color alpha(@base0D, 0.4);
+      @define-color border_color_strong alpha(@base0D, 0.6);
+
+      label {
+        color: @base05;
+      }
+
+      .notification {
+          border: @border_color;
+          box-shadow: none;
+          border-radius: 4px;
+          background: inherit;
+          opacity: 0.8;
+      }
+
+      .notification button {
+          background: transparent;
+          border-radius: 0px;
+          border: none;
+          margin: 0px;
+          padding: 0px;
+      }
+
+      .notification button:hover {
+          background: @base02_alpha;
+      }
+
+
+      .notification-content {
+          min-height: 64px;
+          margin: 10px;
+          padding: 0px;
+          border-radius: 0px;
+      }
+
+      .close-button {
+          background: @base01;
+          color: @base04;
+      }
+
+      .notification-default-action,
+      .notification-action {
+          background: transparent;
+          border: none;
+      }
+
+
+      .notification-default-action {
+          border-radius: 4px;
+      }
+
+      /* When alternative actions are visible */
+      .notification-default-action:not(:only-child) {
+          border-bottom-left-radius: 0px;
+          border-bottom-right-radius: 0px;
+      }
+
+      .notification-action {
+          border-radius: 0px;
+          padding: 2px;
+          color: @base05;
+      }
+
+      /* add bottom border radius to eliminate clipping */
+      .notification-action:first-child {
+          border-bottom-left-radius: 4px;
+      }
+
+      .notification-action:last-child {
+          border-bottom-right-radius: 4px;
+      }
+
+      /*** Notification ***/
+      /* Notification header */
+      .summary {
+          color: @base05;
+          font-size: 16px;
+          padding: 0px;
+      }
+
+      .time {
+          color: @base06;
+          font-size: 12px;
+          text-shadow: none;
+          margin: 0px 0px 0px 0px;
+          padding: 2px 0px;
+      }
+
+      .body {
+          font-size: 14px;
+          font-weight: 500;
+          color: @base04;
+          text-shadow: none;
+          margin: 0px 0px 0px 0px;
+      }
+
+      .body-image {
+          border-radius: 4px;
+      }
+
+      /* The "Notifications" and "Do Not Disturb" text widget */
+      .top-action-title {
+          color: @base05;
+          text-shadow: none;
+      }
+
+      /* Control center */
+
+      .control-center {
+          background: @base01_alpha;
+          border-radius: 5px;
+      }
+
+      .control-center-list {
+          background: @base01_alpha;
+          min-height: 5px;
+          border-top: none;
+          border-radius: 0px 0px 4px 4px;
+      }
+
+      .control-center-list-placeholder,
+      .notification-group-icon,
+      .notification-group {
+        color: alpha(@theme_text_color, 0.50);
+      }
+
+      .notification-group {
+          /* unset the annoying focus thingie */
+          all: unset;
+          border: none;
+          opacity: 0;
+          padding: 0px;
+          box-shadow: none;
+      }
+      .notification-group > box {
+          all: unset;
+          background: @base01_alpha;
+          padding: 8px;
+          margin: 0px;
+          border: none;
+          border-radius: 4px;
+          box-shadow: none;
+      }
+
+
+      .notification-row {
+          outline: none;
+          transition: all 1s ease;
+          background: @base00_alpha;
+          border: 1px solid @base01;
+          margin: 10px 5px 0px 5px;
+          border-radius: 4px;
+      }
+
+      .notification-row:focus,
+      .notification-row:hover {
+          box-shadow: none;
+      }
+
+      .control-center-list > row,
+      .control-center-list > row:focus,
+      .control-center-list > row:hover {
+          background: transparent;
+          border: none;
+          margin: 0px;
+          padding: 5px 10px 5px 10px;
+          box-shadow: none;
+      }
+
+      .control-center-list > row:last-child {
+          padding: 5px 10px 10px 10px;
+      }
+
+
+      /* Window behind control center and on all other monitors */
+      .blank-window {
+          background: transparent;
+      }
+
+      /*** Widgets ***/
+
+      /* Title widget */
+      .widget-title {
+          margin: 0px;
+          background: inherit;
+          border-radius: 4px 4px 0px 0px;
+          border-bottom: none;
+          padding-bottom: 20px;
+      }
+
+      .widget-title > label {
+          margin: 18px 10px;
+          font-size: 20px;
+          font-weight: 500;
+      }
+
+      .widget-title > button {
+          font-weight: 700;
+          padding: 7px 3px;
+          margin-right: 10px;
+          background: transparent;
+          color: @base05;
+          border: 1px solid @border_color;
+          border-radius: 4px;
+      }
+      .widget-title > button:hover {
+          background: @base02_alpha;
+          border: 1px solid @border_color_strong;
+      }
+
+      /* Label widget */
+      .widget-label {
+          margin: 0px;
+          padding: 0px;
+          min-height: 5px;
+          background: @base01_alpha;
+          border-radius: 0px 0px 4px 4px;
+          border-top: none;
+      }
+      .widget-label > label {
+          font-size: 0px;
+          font-weight: 400;
+      }
+
+      /* Menubar */
+      .widget-menubar {
+          background: inherit;
+          border-top: none;
+          border-bottom: none;
+      }
+      .widget-menubar > box > box {
+          margin: 5px 10px 5px 10px;
+          min-height: 40px;
+          border-radius: 4px;
+          background: transparent;
+      }
+      .widget-menubar > box > box > button {
+          background: transparent;
+          border: 1px solid @border_color;
+          min-width: 85px;
+          min-height: 50px;
+          margin-right: 13px;
+          font-size: 17px;
+          padding: 0px;
+      }
+      .widget-menubar > box > box > button:hover {
+          background: @base02_alpha;
+          border: 1px solid @border_color_strong;
+      }
+      .widget-menubar > box > box > button:nth-child(4) {
+          margin-right: 0px;
+      }
+      .widget-menubar button:focus {
+          box-shadow: none;
+      }
+      .widget-menubar button:focus:hover {
+          background: @base02_alpha;
+          box-shadow: none;
+      }
+
+      .widget-menubar > box > revealer > box {
+          margin: 5px 10px 5px 10px;
+          background: @base01_alpha;
+          border: 1px solid @border_color;
+          border-radius: 4px;
+      }
+      .widget-menubar > box > revealer > box > button {
+          background: transparent;
+          min-height: 50px;
+          padding: 0px;
+          margin: 5px;
+      }
+      .widget-menubar > box > revealer > box > button:hover {
+          background: @base02_alpha;
+      }
+
+      /* Buttons grid */
+      .widget-buttons-grid {
+          background-color: @base01_alpha;
+          border-top: none;
+          border-bottom: none;
+          font-size: 14px;
+          font-weight: 500;
+          margin: 0px;
+          padding: 5px;
+          border-radius: 0px;
+      }
+
+      .widget-buttons-grid > flowbox > flowboxchild {
+          background: transparent;
+          border: 1px solid @border_color;
+          border-radius: 4px;
+          min-height: 50px;
+          min-width: 85px;
+          margin: 5px;
+          padding: 0px;
+      }
+
+      .widget-buttons-grid > flowbox > flowboxchild:hover {
+          background: @base02_alpha;
+          border: 1px solid @border_color_strong;
+      }
+
+      .widget-buttons-grid > flowbox > flowboxchild > button {
+          background: transparent;
+          border-radius: 4px;
+          margin: 0px;
+          border: none;
+          box-shadow: none;
+      }
+
+      /* Mpris widget */
+      .widget-mpris {
+          padding: 10px;
+          padding-bottom: 35px;
+          padding-top: 35px;
+          margin-bottom: -33px;
+      }
+      .widget-mpris > box {
+          padding: 0px;
+          margin: -5px 0px -10px 0px;
+          padding: 0px;
+          border-radius: 4px;
+          background: @base01_alpha;
+      }
+      .widget-mpris > box > button:nth-child(1),
+      .widget-mpris > box > button:nth-child(3) {
+          margin-bottom: 0px;
+      }
+      .widget-mpris > box > button:nth-child(1) {
+          margin-left: -25px;
+          margin-right: -25px;
+          opacity: 0;
+      }
+      .widget-mpris > box > button:nth-child(3) {
+          margin-left: -25px;
+          margin-right: -25px;
+          opacity: 0;
+      }
+
+      .widget-mpris-album-art {
+        all: unset;
+      }
+
+      /* Player button box */
+      .widget-mpris > box > carousel > widget > box > box:nth-child(2) {
+          margin: 5px 0px -5px 90px;
+      }
+
+      /* Player buttons */
+      .widget-mpris > box > carousel > widget > box > box:nth-child(2) > button {
+          border-radius: 4px;
+          border: 1px solid @border_color;
+      }
+      .widget-mpris > box > carousel > widget > box > box:nth-child(2) > button:hover {
+          background: @base02_alpha;
+      }
+      carouselindicatordots {
+      	opacity: 0;
+      }
+
+      .widget-mpris-title {
+          color: #eeeeee;
+          font-weight: bold;
+          font-size: 1.25rem;
+          text-shadow: 0px 0px 5px rgba(0, 0, 0, 0.5);
+      }
+      .widget-mpris-subtitle {
+          color: #eeeeee;
+          font-size: 1rem;
+          text-shadow: 0px 0px 3px rgba(0, 0, 0, 1);
+      }
+
+      .widget-mpris-player {
+        border-radius: 0px;
+      	margin: 0px;
+      }
+      .widget-mpris-player > box > image {
+          margin: 0px 0px -48px 0px;
+      }
+
+      .notification-group > box.vertical {
+        margin-top: 3px
+      }
+
+      /* Backlight and volume widgets */
+      .widget-backlight,
+      .widget-volume {
+          background-color: @base01_alpha;
+          border-top: none;
+          border-bottom: none;
+          font-size: 13px;
+          font-weight: 600;
+          border-radius: 0px;
+          margin: 0px;
+          padding: 0px;
+      }
+      .widget-volume > box {
+          background: @base01_alpha;
+          border-radius: 4px;
+          margin: 5px 10px 5px 10px;
+          min-height: 50px;
+      }
+      .widget-volume > box > label {
+          min-width: 50px;
+          padding: 0px;
+      }
+      .widget-volume > box > button {
+          min-width: 50px;
+          box-shadow: none;
+          padding: 0px;
+          border: 1px solid @border_color;
+      }
+      .widget-volume > box > button:hover {
+          background: @base02_alpha;
+      }
+      .widget-volume > revealer > list {
+          background: @base01_alpha;
+          border-radius: 4px;
+          margin-top: 5px;
+          padding: 0px;
+      }
+      .widget-volume > revealer > list > row {
+          padding-left: 10px;
+          min-height: 40px;
+          background: transparent;
+      }
+      .widget-volume > revealer > list > row:hover {
+          background: transparent;
+          box-shadow: none;
+          border-radius: 4px;
+      }
+      .widget-backlight > scale {
+          background: transparent;
+          border: 1px solid @border_color;
+          border-radius: 0px 4px 4px 0px;
+          margin: 5px 10px 5px 0px;
+          padding: 0px 10px 0px 0px;
+          min-height: 50px;
+      }
+      .widget-backlight > label {
+          background: transparent;
+          border: 1px solid @border_color;
+          margin: 5px 0px 5px 10px;
+          border-radius: 4px 0px 0px 4px;
+          padding: 0px;
+          min-height: 50px;
+          min-width: 50px;
+      }
+
+      /* DND widget */
+      .widget-dnd {
+        margin: 8px;
+        font-size: 1.1rem;
+        padding-top: 20px;
+      }
+
+      .widget-dnd>switch {
+        font-size: initial;
+        border-radius: 12px;
+        background: transparent;
+        border: 2px solid @border_color_strong;
+        box-shadow: none;
+      }
+
+      .widget-dnd>switch:checked {
+        background: @base02_alpha;
+      }
+
+      .widget-dnd>switch slider {
+        background: @base0D;
+        border-radius: 12px;
+      }
+
+      /* Toggles */
+      .toggle:checked {
+          background: @base03;
+      }
+      .toggle:checked:hover {
+          background: @base04;
+      }
+
+      /* Sliders */
+      scale {
+          padding: 0px;
+          margin: 0px 10px 0px 10px;
+      }
+
+      scale trough {
+          border-radius: 4px;
+          background: @base02_alpha;
+      }
+
+      scale highlight {
+          border-radius: 5px;
+          min-height: 10px;
+          margin-right: -5px;
+      }
+
+      scale slider {
+          margin: -10px;
+          min-width: 10px;
+          min-height: 10px;
+          background: transparent;
+          box-shadow: none;
+          padding: 0px;
+      }
+      scale slider:hover {
+      }
+
+      .right.overlay-indicator {
+        all: unset;
+      }
+    '';
+  };
 }
