@@ -1,6 +1,6 @@
 { inputs, pkgs, ... }:
 let
-  custom = pkgs.callPackage ../../pkgs/spec-kit.nix { };
+  spec-kit-custom = pkgs.callPackage ../../pkgs/spec-kit.nix { };
 in
 {
   home.packages = (with pkgs; [

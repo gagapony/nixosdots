@@ -1,19 +1,24 @@
 { pkgs, inputs, nixpkgs, self, config, host, ... }:
 let
   username = config.var.username;
+  nameservers = config.var.network.nameservers;
+  gateway = config.var.network.gateway;
 in
 {
   networking = {
-    interfaces.enp8s0.ipv4.addresses = [{
-      address = "192.168.7.59";
-      prefixLength = 24;
-    }];
-
-    interfaces.wlp9s0.ipv4.addresses = [{
-      address = "192.168.7.58";
-      prefixLength = 24;
-    }];
-
+    networkmanager.ensureProfiles.profiles."enp8s0-static" = {
+      connection = {
+        id = "enp8s0-static";
+        type = "ethernet";
+        interface-name = "enp8s0";
+        autoconnect = true;
+      };
+      ipv4 = {
+        method = "manual";
+        address1 = "192.168.7.59/24,${gateway}";
+        dns = nameservers;
+      };
+    };
   };
 
   home-manager.users.${username} = {
