@@ -189,7 +189,7 @@ in
       }
 
       .body-image {
-          border-radius: 4px;
+          border-radius: 10px;
       }
 
       /* The "Notifications" and "Do Not Disturb" text widget */
@@ -203,7 +203,7 @@ in
       .control-center {
           background-color: @base01;
           opacity: 0.85;
-          border-radius: 5px;
+          border-radius: 10px;
       }
 
       .control-center-list {
@@ -211,7 +211,7 @@ in
           opacity: 0.85;
           min-height: 5px;
           border-top: none;
-          border-radius: 0px 0px 4px 4px;
+          border-radius: 0px 0px 10px 10px;
       }
 
       .control-center-list-placeholder,
@@ -235,7 +235,7 @@ in
           padding: 8px;
           margin: 0px;
           border: none;
-          border-radius: 4px;
+          border-radius: 10px;
           box-shadow: none;
       }
 
@@ -247,7 +247,7 @@ in
           opacity: 0.75;
           border: 1px solid @border_color;
           margin: 8px 10px 0px 10px;
-          border-radius: 12px;
+          border-radius: 10px;
       }
       .notification-row:hover {
           opacity: 0.9;
@@ -284,7 +284,7 @@ in
       .widget-title {
           margin: 0px;
           background: inherit;
-          border-radius: 4px 4px 0px 0px;
+          border-radius: 10px 10px 0px 0px;
           border-bottom: none;
           padding-bottom: 20px;
       }
@@ -302,7 +302,7 @@ in
           background: transparent;
           color: @base05;
           border: 1px solid @border_color;
-          border-radius: 4px;
+          border-radius: 10px;
       }
       .widget-title > button:hover {
           background-color: @base02; opacity: 0.6;
@@ -332,7 +332,7 @@ in
       .widget-menubar > box > box {
           margin: 5px 10px 5px 10px;
           min-height: 40px;
-          border-radius: 4px;
+          border-radius: 10px;
           background: transparent;
       }
       .widget-menubar > box > box > button {
@@ -363,7 +363,7 @@ in
           margin: 5px 10px 5px 10px;
           background: @base01;
           border: 1px solid @border_color;
-          border-radius: 4px;
+          border-radius: 10px;
       }
       .widget-menubar > box > revealer > box > button {
           background: transparent;
@@ -390,7 +390,7 @@ in
       .widget-buttons-grid > flowbox > flowboxchild {
           background: transparent;
           border: 1px solid @border_color;
-          border-radius: 4px;
+          border-radius: 10px;
           min-height: 50px;
           min-width: 85px;
           margin: 5px;
@@ -404,7 +404,7 @@ in
 
       .widget-buttons-grid > flowbox > flowboxchild > button {
           background: transparent;
-          border-radius: 4px;
+          border-radius: 10px;
           margin: 0px;
           border: none;
           box-shadow: none;
@@ -421,7 +421,7 @@ in
           padding: 0px;
           margin: -5px 0px -10px 0px;
           padding: 0px;
-          border-radius: 4px;
+          border-radius: 10px;
           background: @base01;
       }
       .widget-mpris > box > button:nth-child(1),
@@ -450,7 +450,7 @@ in
 
       /* Player buttons */
       .widget-mpris > box > carousel > widget > box > box:nth-child(2) > button {
-          border-radius: 4px;
+          border-radius: 10px;
           border: 1px solid @border_color;
       }
       .widget-mpris > box > carousel > widget > box > box:nth-child(2) > button:hover {
@@ -498,7 +498,7 @@ in
       }
       .widget-volume > box {
           background: @base01;
-          border-radius: 4px;
+          border-radius: 10px;
           margin: 5px 10px 5px 10px;
           min-height: 50px;
       }
@@ -517,7 +517,7 @@ in
       }
       .widget-volume > revealer > list {
           background: @base01;
-          border-radius: 4px;
+          border-radius: 10px;
           margin-top: 5px;
           padding: 0px;
       }
@@ -529,12 +529,12 @@ in
       .widget-volume > revealer > list > row:hover {
           background: transparent;
           box-shadow: none;
-          border-radius: 4px;
+          border-radius: 10px;
       }
       .widget-backlight > scale {
           background: transparent;
           border: 1px solid @border_color;
-          border-radius: 0px 4px 4px 0px;
+          border-radius: 0px 10px 10px 0px;
           margin: 5px 10px 5px 0px;
           padding: 0px 10px 0px 0px;
           min-height: 50px;
@@ -543,7 +543,7 @@ in
           background: transparent;
           border: 1px solid @border_color;
           margin: 5px 0px 5px 10px;
-          border-radius: 4px 0px 0px 4px;
+          border-radius: 10px 0px 0px 10px;
           padding: 0px;
           min-height: 50px;
           min-width: 50px;
@@ -558,7 +558,7 @@ in
 
       .widget-dnd>switch {
         font-size: initial;
-        border-radius: 12px;
+        border-radius: 10px;
         background: transparent;
         border: 2px solid @border_color;
         box-shadow: none;
@@ -570,7 +570,7 @@ in
 
       .widget-dnd>switch slider {
         background: @base0D;
-        border-radius: 12px;
+        border-radius: 10px;
       }
 
       /* Toggles */
@@ -588,12 +588,12 @@ in
       }
 
       scale trough {
-          border-radius: 4px;
+          border-radius: 10px;
           background-color: @base02; opacity: 0.6;
       }
 
       scale highlight {
-          border-radius: 5px;
+          border-radius: 10px;
           min-height: 10px;
           margin-right: -5px;
       }
