@@ -122,82 +122,46 @@ in
 
     # Style.css 转换为 Nix style 字符串，使用 Stylix 颜色变量
     style = ''
-      /* 定义带透明度的颜色变量 */
-      @define-color base00_alpha alpha(@base00, 0.8);
-      @define-color base01_alpha alpha(@base01, 0.8);
-      @define-color base02_alpha alpha(@base02, 0.8);
-
-      /* 定义淡化的边框颜色 */
-      @define-color border_color alpha(@base0D, 0.4);
-      @define-color border_color_strong alpha(@base0D, 0.6);
+      /* 定义颜色变量 */
+      @define-color border_color shade(@base04, 1.3);
 
       label {
         color: @base05;
       }
 
-      .notification {
-          border: @border_color;
+      /* ========== 通知弹窗 ========== */
+      /* 只影响弹窗通知，不影响控制中心 */
+      .floating-notifications .notification {
+          background-color: transparent;
+          border: none;
           box-shadow: none;
-          border-radius: 4px;
-          background: inherit;
-          opacity: 0.8;
       }
 
-      .notification button {
-          background: transparent;
-          border-radius: 0px;
-          border: none;
-          margin: 0px;
-          padding: 0px;
+      .floating-notifications .notification:hover {
+          opacity: 1;
       }
 
-      .notification button:hover {
-          background: @base02_alpha;
+      /* 隐藏弹窗通知的所有按钮和边框 */
+      .floating-notifications .notification button,
+      .floating-notifications .notification > button,
+      .floating-notifications .notification .close-button,
+      .floating-notifications .notification .notification-action,
+      .floating-notifications .notification .notification-default-action {
+          display: none !important;
+          border: none !important;
+          background: transparent !important;
       }
 
-
-      .notification-content {
+      .floating-notifications .notification .notification-content {
           min-height: 64px;
-          margin: 10px;
-          padding: 0px;
-          border-radius: 0px;
-      }
-
-      .close-button {
-          background: @base01;
-          color: @base04;
-      }
-
-      .notification-default-action,
-      .notification-action {
-          background: transparent;
           border: none;
+          background: transparent;
       }
 
-
-      .notification-default-action {
-          border-radius: 4px;
-      }
-
-      /* When alternative actions are visible */
-      .notification-default-action:not(:only-child) {
-          border-bottom-left-radius: 0px;
-          border-bottom-right-radius: 0px;
-      }
-
-      .notification-action {
-          border-radius: 0px;
-          padding: 2px;
-          color: @base05;
-      }
-
-      /* add bottom border radius to eliminate clipping */
-      .notification-action:first-child {
-          border-bottom-left-radius: 4px;
-      }
-
-      .notification-action:last-child {
-          border-bottom-right-radius: 4px;
+      /* 移除弹窗通知中所有元素的边框 */
+      .floating-notifications .notification * {
+          border: none !important;
+          box-shadow: none !important;
       }
 
       /*** Notification ***/
@@ -237,12 +201,14 @@ in
       /* Control center */
 
       .control-center {
-          background: @base01_alpha;
+          background-color: @base01;
+          opacity: 0.85;
           border-radius: 5px;
       }
 
       .control-center-list {
-          background: @base01_alpha;
+          background-color: @base01;
+          opacity: 0.85;
           min-height: 5px;
           border-top: none;
           border-radius: 0px 0px 4px 4px;
@@ -264,7 +230,8 @@ in
       }
       .notification-group > box {
           all: unset;
-          background: @base01_alpha;
+          background-color: @base01;
+          opacity: 0.8;
           padding: 8px;
           margin: 0px;
           border: none;
@@ -275,11 +242,15 @@ in
 
       .notification-row {
           outline: none;
-          transition: all 1s ease;
-          background: @base00_alpha;
-          border: 1px solid @base01;
-          margin: 10px 5px 0px 5px;
-          border-radius: 4px;
+          transition: all 0.2s ease;
+          background-color: @base00;
+          opacity: 0.75;
+          border: 1px solid @border_color;
+          margin: 8px 10px 0px 10px;
+          border-radius: 12px;
+      }
+      .notification-row:hover {
+          opacity: 0.9;
       }
 
       .notification-row:focus,
@@ -334,8 +305,8 @@ in
           border-radius: 4px;
       }
       .widget-title > button:hover {
-          background: @base02_alpha;
-          border: 1px solid @border_color_strong;
+          background-color: @base02; opacity: 0.6;
+          border: 1px solid @border_color;
       }
 
       /* Label widget */
@@ -343,7 +314,7 @@ in
           margin: 0px;
           padding: 0px;
           min-height: 5px;
-          background: @base01_alpha;
+          background: @base01;
           border-radius: 0px 0px 4px 4px;
           border-top: none;
       }
@@ -374,8 +345,8 @@ in
           padding: 0px;
       }
       .widget-menubar > box > box > button:hover {
-          background: @base02_alpha;
-          border: 1px solid @border_color_strong;
+          background-color: @base02; opacity: 0.6;
+          border: 1px solid @border_color;
       }
       .widget-menubar > box > box > button:nth-child(4) {
           margin-right: 0px;
@@ -384,13 +355,13 @@ in
           box-shadow: none;
       }
       .widget-menubar button:focus:hover {
-          background: @base02_alpha;
+          background-color: @base02; opacity: 0.6;
           box-shadow: none;
       }
 
       .widget-menubar > box > revealer > box {
           margin: 5px 10px 5px 10px;
-          background: @base01_alpha;
+          background: @base01;
           border: 1px solid @border_color;
           border-radius: 4px;
       }
@@ -401,12 +372,12 @@ in
           margin: 5px;
       }
       .widget-menubar > box > revealer > box > button:hover {
-          background: @base02_alpha;
+          background-color: @base02; opacity: 0.6;
       }
 
       /* Buttons grid */
       .widget-buttons-grid {
-          background-color: @base01_alpha;
+          background-color: @base01;
           border-top: none;
           border-bottom: none;
           font-size: 14px;
@@ -427,8 +398,8 @@ in
       }
 
       .widget-buttons-grid > flowbox > flowboxchild:hover {
-          background: @base02_alpha;
-          border: 1px solid @border_color_strong;
+          background-color: @base02; opacity: 0.6;
+          border: 1px solid @border_color;
       }
 
       .widget-buttons-grid > flowbox > flowboxchild > button {
@@ -451,7 +422,7 @@ in
           margin: -5px 0px -10px 0px;
           padding: 0px;
           border-radius: 4px;
-          background: @base01_alpha;
+          background: @base01;
       }
       .widget-mpris > box > button:nth-child(1),
       .widget-mpris > box > button:nth-child(3) {
@@ -483,7 +454,7 @@ in
           border: 1px solid @border_color;
       }
       .widget-mpris > box > carousel > widget > box > box:nth-child(2) > button:hover {
-          background: @base02_alpha;
+          background-color: @base02; opacity: 0.6;
       }
       carouselindicatordots {
       	opacity: 0;
@@ -516,7 +487,7 @@ in
       /* Backlight and volume widgets */
       .widget-backlight,
       .widget-volume {
-          background-color: @base01_alpha;
+          background-color: @base01;
           border-top: none;
           border-bottom: none;
           font-size: 13px;
@@ -526,7 +497,7 @@ in
           padding: 0px;
       }
       .widget-volume > box {
-          background: @base01_alpha;
+          background: @base01;
           border-radius: 4px;
           margin: 5px 10px 5px 10px;
           min-height: 50px;
@@ -542,10 +513,10 @@ in
           border: 1px solid @border_color;
       }
       .widget-volume > box > button:hover {
-          background: @base02_alpha;
+          background-color: @base02; opacity: 0.6;
       }
       .widget-volume > revealer > list {
-          background: @base01_alpha;
+          background: @base01;
           border-radius: 4px;
           margin-top: 5px;
           padding: 0px;
@@ -589,12 +560,12 @@ in
         font-size: initial;
         border-radius: 12px;
         background: transparent;
-        border: 2px solid @border_color_strong;
+        border: 2px solid @border_color;
         box-shadow: none;
       }
 
       .widget-dnd>switch:checked {
-        background: @base02_alpha;
+        background-color: @base02; opacity: 0.6;
       }
 
       .widget-dnd>switch slider {
@@ -618,7 +589,7 @@ in
 
       scale trough {
           border-radius: 4px;
-          background: @base02_alpha;
+          background-color: @base02; opacity: 0.6;
       }
 
       scale highlight {
