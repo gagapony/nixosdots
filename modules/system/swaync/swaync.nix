@@ -1,9 +1,25 @@
 { config, pkgs, lib, ... }:
 let
   colors = config.lib.stylix.colors;
+  screenshot = pkgs.writeShellScriptBin "screenshot" ''
+    swaync-client -cp
+    sleep 0.3
+
+    if [ "$1" == "full" ]; then
+      grim - | swappy -f -
+    elif [ "$1" == "area" ]; then
+      grim -g "$(slurp)" - | swappy -f -
+    else
+      echo "Usage: myshot [full|area]"
+    fi
+  '';
 in
 {
-  home.packages = (with pkgs; [ swaynotificationcenter ]);
+  home.packages = (with pkgs; [
+    swaynotificationcenter
+  ]) ++ [
+    screenshot
+  ];
 
   services.swaync = {
     enable = true;
@@ -67,8 +83,8 @@ in
             label = "  ";
             position = "left";
             actions = [
-              { label = "󰹑  Whole screen"; command = "grimblast --notify --cursor --freeze copy output"; }
-              { label = "󰩭  Window / Region"; command = "grimblast --notify --cursor --freeze copy area"; }
+              { label = "󰩭  Window / Region"; command = "screenshot area"; }
+              { label = "󰹑  Whole screen"; command = "screenshot full"; }
             ];
           };
 
