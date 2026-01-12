@@ -73,6 +73,7 @@
       url = "github:gagapony/dotfiles";
     };
     nix-colors.url = "github:misterio77/nix-colors";
+    opencode.url = "github:anomalyco/opencode";
   };
 
   outputs = { nixpkgs, self, ... } @ inputs:
