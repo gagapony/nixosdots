@@ -14,7 +14,7 @@ in
     direnv
     nix-direnv
     claude-code
-    opencode-custom
+    # opencode-custom
     spec-kit-custom
   ]);
 }

@@ -1,6 +1,8 @@
 { pkgs, inputs, nixpkgs, self, config, host, lib, ... }:
 let
   username = config.var.username;
+  nameservers = config.var.network.nameservers;
+  gateway = config.var.network.gateway;
 in
 {
   boot = {
@@ -20,7 +22,10 @@ in
       address = "192.168.7.12";
       prefixLength = 24;
     }];
+    defaultGateway = gateway;
+    nameservers = [ "192.168.7.3" "223.5.5.5" ];
   };
+
 
   services.openvscode-server = {
     enable = true;
