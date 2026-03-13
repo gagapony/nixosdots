@@ -12,8 +12,7 @@ in
     ripgrep
     gcc
     lazygit
-    unzip
-    nodejs
+    unzip    
     # rust-bin.nightly.latest.default
     lua-language-server    # Lua LSP
     nixpkgs-fmt           # Nix 格式化

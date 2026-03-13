@@ -5,6 +5,7 @@ let
 in
 {
   home.packages = (with pkgs; [
+    nodejs
     home-manager
     yazi
     socat
