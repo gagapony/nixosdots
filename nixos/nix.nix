@@ -21,7 +21,7 @@ in
       allowed-users = [ "@wheel" "@nixbld" ];
       auto-optimise-store = true;
       experimental-features = [ "nix-command" "flakes" ];
-      access-tokens = [ "github.com=${config.var.github.token}" ];
+      # GitHub 鉴权已改用 sops-nix 管理的 netrc-file（见 nixos/sops.nix）。
       substituters = [
         "https://mirrors.ustc.edu.cn/nix-channels/store"
         "https://cache.nixos.org"
