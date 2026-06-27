@@ -1,6 +1,5 @@
 { inputs, pkgs, ... }:
 let
-  spec-kit-custom = pkgs.callPackage ../../pkgs/spec-kit.nix { };
   opencode-custom = inputs.opencode.packages.${pkgs.stdenv.hostPlatform.system}.default;
 in
 {
@@ -17,6 +16,6 @@ in
     claude-code
     # opencode-custom
     opencode
-    spec-kit-custom
+    spec-kit
   ]);
 }

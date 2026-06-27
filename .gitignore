@@ -1,0 +1,3 @@
+# Nix build outputs (symlinks created by `nix build` / `nixos-rebuild build`)
+result
+result-*

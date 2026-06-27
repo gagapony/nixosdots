@@ -37,6 +37,12 @@ in
     viAlias = true;
     vimAlias = true;
 
+    # Provider 脚本：跟随 nixpkgs 26.05+ 的新默认（禁用），让构建更精简，
+    # 同时消除 home-manager 在 stateVersion < 26.05 下的弃用提示。
+    # 若你的 nvim 配置确实用到 :python3 / :ruby，把这两行改成 true 即可。
+    withPython3 = false;
+    withRuby = false;
+
     # 编译环境配置
     extraWrapperArgs = with pkgs; [
       "--suffix"
