@@ -18,7 +18,7 @@ in
     nixpkgs-fmt           # Nix 格式化
     selene               # Lua 静态分析
     stylua               # Lua 格式化
-    nodePackages.prettier # JavaScript/TypeScript/CSS/JSON 等格式化
+    prettier # JavaScript/TypeScript/CSS/JSON 等格式化
     clang-tools          # C/C++ 格式化工具
     black                # Python 格式化
     nil                  # Nix LSP

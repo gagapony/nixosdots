@@ -2,7 +2,7 @@
   imports = [
     # modules
     inputs.home-manager.nixosModules.home-manager
-    inputs.stylix.nixosModules.stylix
+    # inputs.stylix.nixosModules.stylix
     inputs.nur.modules.nixos.default
 
     ./addon-configuration.nix
@@ -22,7 +22,7 @@
     ../../nixos/variables-config.nix
 
     # Choose your theme here
-    ../../modules/themes/stylix/default.nix
+    # ../../modules/themes/stylix/default.nix
     ];
 
 

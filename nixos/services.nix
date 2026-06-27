@@ -31,6 +31,9 @@
       exports = ''
         /home/${config.var.username}/Share *(rw,sync,no_subtree_check,no_root_squash)
       '';
+      mountdPort = 20048;
+      statdPort = 4000;
+      lockdPort = 4001;
     };
   };
   services.udev.extraRules = ''

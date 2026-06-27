@@ -64,6 +64,7 @@ in
         llvm-vs-code-extensions.vscode-clangd
         xaver.clang-format
         ms-vscode.cmake-tools
+        yzhang.markdown-all-in-one
       ];
     };
   };

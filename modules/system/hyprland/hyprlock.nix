@@ -29,7 +29,7 @@
     # BACKGROUND
     background {
       monitor =
-      path = ${inputs.nixy-wallpapers + "/wallpapers/cat-leaves.png"}
+      path = ${../../../assets/cat-leaves.png}
       color = $base
       blur_passes = 0
     }

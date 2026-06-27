@@ -24,11 +24,6 @@
       url = "github:KZDKM/Hyprspace";
       inputs.hyprland.follows = "hyprland";
     };
-    nixy-wallpapers = {
-      url = "github:anotherhadi/nixy-wallpapers";
-      flake = false;
-    };
-
     catppuccin-bat = {
       url = "github:catppuccin/bat";
       flake = false;

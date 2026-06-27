@@ -4,7 +4,7 @@ let
 in
 {
   home.file = {
-    "Pictures/wallpapers/others/cat-leaves.png".source = inputs.nixy-wallpapers + "/wallpapers/cat-leaves.png";
+    "Pictures/wallpapers/others/cat-leaves.png".source = ../../../assets/cat-leaves.png;
   };
 
   gtk = {
