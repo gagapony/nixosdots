@@ -1,0 +1,26 @@
+{
+  "skill_name": "nixosdots-maintainer",
+  "evals": [
+    {
+      "id": 0,
+      "name": "nodepackages-removed-error",
+      "prompt": "我在跑 nixos-rebuild 的时候报错了：error: nodePackages has been removed. Many packages are now available at the top level. 这是 nvim.nix 里用到的。帮我修一下，但别帮我重建系统。",
+      "expected_output": "Claude identifies nodePackages.prettier in modules/programs/nvim.nix, changes it to prettier, validates with dry-build (EXIT=0), and does NOT run switch.",
+      "files": []
+    },
+    {
+      "id": 1,
+      "name": "flake-update-version-mismatch",
+      "prompt": "我跑了 nix flake update nixpkgs，然后 rebuild 报错说 option 'plugins.X.runtime' does not exist。这是什么问题？怎么修？",
+      "expected_output": "Claude diagnoses this as a version mismatch: only nixpkgs was updated but home-manager/nixvim are stale. Recommends full 'nix flake update' to align all inputs. Does NOT run switch.",
+      "files": []
+    },
+    {
+      "id": 2,
+      "name": "remove-heavy-flake-input",
+      "prompt": "nixy-wallpapers 这个 flake input 更新太慢了，452MB 的仓库我好像只用了一张图。帮我看看是不是可以去掉？",
+      "expected_output": "Claude greps for nixy-wallpapers usage, finds only cat-leaves.png is used (4 places), recommends vendoring the image into assets/, and offers to make the change. References the 'heavy inputs' pattern from the skill.",
+      "files": []
+    }
+  ]
+}
