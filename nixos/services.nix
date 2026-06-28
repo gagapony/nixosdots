@@ -1,4 +1,4 @@
-{ config, pkgs, ... }:
+{ config, pkgs, lib, ... }:
 {
   services = {
     gvfs.enable = true;
@@ -17,7 +17,9 @@
     # };
     gnome.gnome-keyring.enable = true;
     timesyncd = {
-      enable = true;
+      # mkDefault：让 wsl（nixos-wsl 关闭 timesyncd、改用 Windows 同步时间）能覆盖；
+      # 其余主机无冲突，仍为 true。
+      enable = lib.mkDefault true;
       servers = [
         "ntp.aliyun.com"
         "ntp1.aliyun.com"
