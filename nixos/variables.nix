@@ -15,7 +15,7 @@
     location = "Beijing";
     timeZone = "Asia/Shanghai";
     defaultLocale = "en_US.UTF-8";
-    extraLocale = "zh_CN.UTF-8";
+    extraLocale = "en_US.UTF-8";
 
     autoUpgrade = false;
     autoGarbageCollector = false;
