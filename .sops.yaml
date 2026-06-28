@@ -1,10 +1,11 @@
 # sops 加密规则
-# vm 的 age 公钥由 `age-keygen` 生成后填入下方占位符。
+# 统一的 age 公钥（由 `age-keygen` 生成）。所有 host 共用同一把私钥，
+# 任意一台持有该私钥的机器都能解密 secrets/。
 keys:
-  - &vm age1msvddvd993muthdfjydy0lkvhyx9dx920xrsmgh4w6efu67andusht7gmk
+  - &default age1msvddvd993muthdfjydy0lkvhyx9dx920xrsmgh4w6efu67andusht7gmk
 creation_rules:
-  # 匹配 secrets/ 下的 yaml，统一用 vm 的 age 公钥加密
+  # 匹配 secrets/ 下的 yaml，统一用上面的 age 公钥加密
   - path_regex: secrets/.*\.ya?ml$
     key_groups:
       - age:
-          - *vm
+          - *default
