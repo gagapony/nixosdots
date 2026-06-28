@@ -24,6 +24,7 @@
     ../../nixos/nix.nix
     ../../nixos/security.nix
     ../../nixos/services.nix
+    ../../nixos/sops.nix
     ../../nixos/timezone.nix
     ../../nixos/users.nix
     ../../nixos/variables-config.nix

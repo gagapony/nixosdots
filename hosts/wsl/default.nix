@@ -12,6 +12,7 @@
     ../../nixos/base.nix
     ../../nixos/users.nix
     ../../nixos/services.nix
+    ../../nixos/sops.nix
     ../../nixos/home-manager.nix
     ../../nixos/nix.nix
     ../../nixos/docker.nix
