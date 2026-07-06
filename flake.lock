@@ -372,11 +372,11 @@
         "nixpkgs": "nixpkgs_5"
       },
       "locked": {
-        "lastModified": 1782633415,
-        "narHash": "sha256-eLi62xnyr2cHhkr9hfciglwEsS9XdJsZkPRt5KtdqJk=",
+        "lastModified": 1783047161,
+        "narHash": "sha256-jv/eMDiRy1YApJbNxDK8xmyBgn8JVrk8Egs8WmoZYKk=",
         "owner": "gagapony",
         "repo": "dotfiles",
-        "rev": "abdf04eecfb46d352d0e9b60926b73bc6e7806fd",
+        "rev": "8d6d55ca2ec59f81c60f5bcb711a9796a5fa14e2",
         "type": "github"
       },
       "original": {
