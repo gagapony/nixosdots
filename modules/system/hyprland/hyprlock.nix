@@ -1,4 +1,4 @@
-{ pkgs, inputs, ... }:
+{ pkgs, inputs, config, ... }:
 {
   home.packages = [ pkgs.hyprlock ];
   xdg.configFile."hypr/hyprlock.conf".text = ''
@@ -29,7 +29,7 @@
     # BACKGROUND
     background {
       monitor =
-      path = ${../../../assets/cat-leaves.png}
+      path = ${config.var.wallpaper}
       color = $base
       blur_passes = 0
     }

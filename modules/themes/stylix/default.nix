@@ -52,6 +52,6 @@ in
       nixos-icons.enable = true;
     };
 
-    image = ../../../assets/cat-leaves.png;
+    image = config.var.wallpaper;
   };
 }

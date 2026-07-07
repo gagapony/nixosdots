@@ -44,6 +44,11 @@
       cursor-accent = "light";
     };
 
+    # Wallpaper — drop the file in <repo>/assets/ and set its name here.
+    # This single value feeds stylix (image), hyprlock (background) and
+    # swaybg (desktop background); no other path needs editing.
+    wallpaper = ../assets/hyprland.png;
+
     colorScheme = inputs.nix-colors.colorSchemes."catppuccin-${config.var.catppuccin.flavor}";
 
     # theme = import ../../themes/var/pinky.nix;

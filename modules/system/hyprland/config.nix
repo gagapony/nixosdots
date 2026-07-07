@@ -9,7 +9,7 @@
 # shape; those are marked "best-guess" below and are the spots to check first
 # if a keybind misbehaves after switching (fullscreen modes, exact resize,
 # directional movewindow, silent workspace-move).
-{ inputs, ... }:
+{ inputs, config, ... }:
 {
   wayland.windowManager.hyprland.extraConfig = ''
     local mainMod = "SUPER"
@@ -24,7 +24,7 @@
       hl.exec_cmd("dbus-update-activation-environment --systemd WAYLAND_DISPLAY XDG_CURRENT_DESKTOP")
       hl.exec_cmd("nm-applet")
       hl.exec_cmd("wl-clip-persist --clipboard regular")
-      hl.exec_cmd("swaybg -m fill -i $(find ~/Pictures/wallpapers/ -maxdepth 1 -type f)")
+      hl.exec_cmd("swaybg -m fill -i ${config.var.wallpaper}")
       hl.exec_cmd("fcitx5 -d --replace")
       hl.exec_cmd("poweralertd")
       hl.exec_cmd("waybar")
@@ -65,7 +65,6 @@
         special_scale_factor = 1.0,
         split_width_multiplier = 1.0,
         use_active_for_splits = true,
-        pseudotile = true,
         preserve_split = true,
       },
       master = {
@@ -89,7 +88,6 @@
         },
         shadow = {
           enabled = true,
-          ignore_window = true,
           offset = "0 2",
           range = 20,
           render_power = 3,
