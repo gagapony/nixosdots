@@ -16,6 +16,7 @@
   systemd.user.targets.hyprland-session.Unit.Wants = [ "xdg-desktop-autostart.target" ];
   wayland.windowManager.hyprland = {
     enable = true;
+    configType = "lua"; # adopted lua config format (26.05 default)
     xwayland = {
       enable = true;
       # hidpi = true;

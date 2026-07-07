@@ -11,7 +11,7 @@ let
   # somePlugin = marketplace "publisher" "name" "version" "sha256";
 in
 {
-  programs.vscode = {
+  programs.vscodium = {
     enable = true;
     package =
       (pkgs.vscodium.override

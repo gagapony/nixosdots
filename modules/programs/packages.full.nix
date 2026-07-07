@@ -1,11 +1,9 @@
 { inputs, pkgs, ... }:
 let
-  _2048 = pkgs.callPackage ../../pkgs/2048/default.nix { };
   _stm32cubemx = pkgs.callPackage ../../pkgs/stm32cubemx/default.nix { }; # for specific stm32cubemx version
 in
 {
   home.packages = (with pkgs; [
-    _2048
     radeontop
     vulkan-tools
     adwsteamgtk
@@ -40,7 +38,7 @@ in
     yt-dlp-light
     zenity
     winetricks
-    wineWowPackages.wayland
+    wineWow64Packages.wayland
     qq
     rustdesk-flutter
     feishu

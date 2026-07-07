@@ -23,7 +23,7 @@
     # ./programs/qutebrowser/qutebrowser.nix
     ./programs/cava.nix
     ./programs/vscodium.nix
-    ./programs/ozone.nix
+    # ./programs/ozone.nix
     # ./programs/shell
     # ./programs/fetch
     ./programs/git.nix

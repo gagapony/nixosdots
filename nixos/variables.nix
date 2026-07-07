@@ -2,7 +2,7 @@
   imports = [ ./variables-config.nix ];
 
   config.var = {
-    version = "25.05";
+    version = "26.05";
 
     hsystem = "x86_64-linux";
     hostname = "nixos";

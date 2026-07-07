@@ -26,8 +26,8 @@ in
     };
   };
   home.activation.cleanFirefoxSearch = lib.hm.dag.entryBefore [ "checkLinkTargets" ] ''
-      $DRY_RUN_CMD rm -f "$HOME/.mozilla/firefox/default/search.json.mozlz4"
-      $DRY_RUN_CMD rm -f "$HOME/.mozilla/firefox/default/search.json.mozlz4.hm-backup"
+      $DRY_RUN_CMD rm -f "${config.xdg.configHome}/mozilla/firefox/default/search.json.mozlz4"
+      $DRY_RUN_CMD rm -f "${config.xdg.configHome}/mozilla/firefox/default/search.json.mozlz4.hm-backup"
     '';
 }
 
