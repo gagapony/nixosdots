@@ -14,6 +14,7 @@ let
   vm-start = pkgs.writeScriptBin "vm-start" (builtins.readFile ./scripts/vm-start.sh);
   ascii = pkgs.writeScriptBin "ascii" (builtins.readFile ./scripts/ascii.sh);
   record = pkgs.writeScriptBin "record" (builtins.readFile ./scripts/record.sh);
+  hyprsunset-toggle = pkgs.writeShellScriptBin "hyprsunset-toggle" (builtins.readFile ./scripts/hyprsunset-toggle.sh);
 in
 {
   home.packages = with pkgs; [
@@ -40,5 +41,7 @@ in
     ascii
 
     record
+
+    hyprsunset-toggle
   ];
 }

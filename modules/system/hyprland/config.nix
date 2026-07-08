@@ -27,6 +27,7 @@
       hl.exec_cmd("swaybg -m fill -i ${config.var.wallpaper}")
       hl.exec_cmd("fcitx5 -d --replace")
       hl.exec_cmd("poweralertd")
+      hl.exec_cmd("hyprsunset")
       hl.exec_cmd("waybar")
       hl.exec_cmd("swaync")
       hl.exec_cmd("wl-paste --watch cliphist store")
@@ -187,6 +188,10 @@
     hl.bind(mainMod .. " + C",              hl.dsp.exec_cmd("hyprpicker -a"))
     hl.bind(mainMod .. " + SHIFT + W",      hl.dsp.exec_cmd("vm-start"))
     hl.bind(mainMod .. " + S",              hl.dsp.exec_cmd('grim -g "$(slurp)" - | swappy -f -'))
+
+    -- Toggle blue-light filter (hyprsunset) via Hyprland IPC: identity = neutral,
+    -- temperature 3500 = warm.
+    hl.bind(mainMod .. " + N",              hl.dsp.exec_cmd("hyprsunset-toggle"))
 
     -- move focus
     hl.bind(mainMod .. " + left",  hl.dsp.focus({ direction = "left" }))
