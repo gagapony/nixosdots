@@ -36,7 +36,7 @@
         8123 8485 10000 16601 26885 4000 4001  # Preserved services
         59010 59011          # Likely TCP (VNC/apps)
         2049 111 20048       # NFS
-        21064                # HomeKit HAP
+        21064 21065                # HomeKit HAP
       ];
 
       # UDP (only what actually needs UDP)
