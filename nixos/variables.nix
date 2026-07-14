@@ -29,8 +29,21 @@
     network = {
       gateway = "192.168.7.3";
       nameservers = "114.114.114.114;8.8.8.8;";
-      tcpPorts = [ 22 80 443 2049 111 20048 4000 4001 59010 59011 8485 10000 16601 8443 8080 26885 8123 21064];
-      udpPorts = [ 22 80 443 2049 111 20048 4000 4001 59010 59011 8485 10000 16601 8443 8080 26885 8123 21064];
+      # TCP (web, SSH, HAP, NFS, etc. - all preserved)
+      tcpPorts = [
+        22
+        80 443 8443 8080     # Web
+        8123 8485 10000 16601 26885 4000 4001  # Preserved services
+        59010 59011          # Likely TCP (VNC/apps)
+        2049 111 20048       # NFS
+        21064                # HomeKit HAP
+      ];
+
+      # UDP (only what actually needs UDP)
+      udpPorts = [
+        5353                 # mDNS (required for HomeKit)
+        2049 111 20048       # NFS (conservatively kept on UDP)
+      ];
     };
 
     # Choose your theme variables here
