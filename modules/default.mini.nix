@@ -14,6 +14,7 @@
     ./programs/zsh.nix
     ./programs/git.nix
     ./programs/lazygit.nix
+    ./programs/btop.nix
   ];
 
   home = {

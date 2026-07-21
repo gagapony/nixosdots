@@ -37,12 +37,14 @@
         59010 59011          # Likely TCP (VNC/apps)
         2049 111 20048       # NFS
         21064 21065                # HomeKit HAP
+        21115 21116 21117 21118 21119 # RustDesk
       ];
 
       # UDP (only what actually needs UDP)
       udpPorts = [
         5353                 # mDNS (required for HomeKit)
         2049 111 20048       # NFS (conservatively kept on UDP)
+        21116                # RustDesk
       ];
     };
 
