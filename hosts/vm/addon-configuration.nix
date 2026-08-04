@@ -26,6 +26,18 @@ in
     nameservers = [ "192.168.7.3" "223.5.5.5" ];
   };
 
+  systemd.services.komari-agent = {
+    description = "Komari Agent Service";
+    after = [ "network.target" ];
+    wantedBy = [ "multi-user.target" ];
+    serviceConfig = {
+      Type = "simple";
+      ExecStart = "/opt/komari/agent -e https://komari.529777.xyz:8443 --auto-discovery GE3WxvdC6g1WRhpVDdpifzZQ";
+      WorkingDirectory = "/opt/komari";
+      Restart = "always";
+      User = "gabriel";
+    };
+  };
 
   services.openvscode-server = {
     enable = true;
