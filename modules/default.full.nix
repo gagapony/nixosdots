@@ -35,6 +35,7 @@
     # ./programs/nh
     ./programs/firefox.nix
     ./programs/btop.nix
+    ./programs/node.nix
     # ./programs/server-page
 
     # Scripts
