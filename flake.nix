@@ -69,6 +69,16 @@
     };
     nix-colors.url = "github:misterio77/nix-colors";
     opencode.url = "github:anomalyco/opencode";
+
+    hermes-agent = {
+      url = "github:NousResearch/hermes-agent";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
+    hermes-webui = {
+      url = "github:nesquena/hermes-webui";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
   outputs = { nixpkgs, self, ... } @ inputs:

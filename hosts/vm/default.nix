@@ -18,6 +18,7 @@
     ../../nixos/nix.nix
     ../../nixos/sops.nix
     ../../nixos/docker.nix
+    ../../nixos/hermes-agent.nix
     ../../nixos/security.nix
     ../../nixos/timezone.nix
     ../../nixos/variables-config.nix
