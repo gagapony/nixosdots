@@ -79,6 +79,11 @@
       url = "github:nesquena/hermes-webui";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+
+    paseo = {
+      url = "github:getpaseo/paseo";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
   outputs = { nixpkgs, self, ... } @ inputs:

@@ -1954,6 +1954,26 @@
         "type": "github"
       }
     },
+    "paseo": {
+      "inputs": {
+        "nixpkgs": [
+          "nixpkgs"
+        ]
+      },
+      "locked": {
+        "lastModified": 1789724977,
+        "narHash": "sha256-WzUzGqIenuU9vc1dj0BHoCCfyZzlW8EIgncg0vC9QFk=",
+        "owner": "getpaseo",
+        "repo": "paseo",
+        "rev": "d636abd7a4ce302e7ccb9eb6074f637c6dd4d83b",
+        "type": "github"
+      },
+      "original": {
+        "owner": "getpaseo",
+        "repo": "paseo",
+        "type": "github"
+      }
+    },
     "pre-commit-hooks": {
       "inputs": {
         "flake-compat": "flake-compat",
@@ -2055,6 +2075,7 @@
         "nixvim": "nixvim",
         "nur": "nur",
         "opencode": "opencode",
+        "paseo": "paseo",
         "rust-overlay": "rust-overlay",
         "sops-nix": "sops-nix",
         "spicetify-nix": "spicetify-nix",
